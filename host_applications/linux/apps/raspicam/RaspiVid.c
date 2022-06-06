@@ -1602,7 +1602,7 @@ static MMAL_STATUS_T create_camera_component(RASPIVID_STATE *state)
    if(state->camera_parameters.shutter_speed > 6000000)
    {
       MMAL_PARAMETER_FPS_RANGE_T fps_range = {{MMAL_PARAMETER_FPS_RANGE, sizeof(fps_range)},
-         { 50, 1000 }, {166, 1000}
+         { 5, 1000 }, {166, 1000}
       };
       mmal_port_parameter_set(preview_port, &fps_range.hdr);
    }
@@ -1651,7 +1651,7 @@ static MMAL_STATUS_T create_camera_component(RASPIVID_STATE *state)
    if(state->camera_parameters.shutter_speed > 6000000)
    {
       MMAL_PARAMETER_FPS_RANGE_T fps_range = {{MMAL_PARAMETER_FPS_RANGE, sizeof(fps_range)},
-         { 50, 1000 }, {166, 1000}
+         { 5, 1000 }, {166, 1000}
       };
       mmal_port_parameter_set(video_port, &fps_range.hdr);
    }
@@ -2407,6 +2407,8 @@ int main(int argc, const char **argv)
    MMAL_PORT_T *splitter_input_port = NULL;
    MMAL_PORT_T *splitter_output_port = NULL;
    MMAL_PORT_T *splitter_preview_port = NULL;
+
+   check_camera_stack();
 
    bcm_host_init();
 
